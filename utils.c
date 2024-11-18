@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 12:50:53 by jbergos           #+#    #+#             */
-/*   Updated: 2024/11/17 14:30:23 by jbergos          ###   ########.fr       */
+/*   Updated: 2024/11/18 16:54:40 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,60 @@ long int	ft_atol_modified(char *s)
 	return (res * n);
 }
 
-void	deploy_table(t_push_swap **a)
+void	deploy_all_table(t_push_swap *a, t_push_swap *b)
 {
-	char	*s;
+	char *sa;
+	char *sb;
+	if (!a && !b)
+		return ;
+	if (a)
+	{
+		sa = ft_itoa(a->content);
+		ft_putstr_fd(sa, 0);
+		ft_putstr_fd("  |  ", 0);
+		free(sa);
+	}
+	else
+		ft_putstr_fd("   |  ", 0);
+	if (b)
+	{
+		sb = ft_itoa(b->content);
+		ft_putstr_fd(sb, 0);
+		ft_putstr_fd("\n", 0);
+		free(sb);
+	}
+	else
+		ft_putstr_fd(" \n", 0);
+	if (!b)
+	{
+		if (!a)
+			return ;
+		if (a->next == NULL)
+			return ;
+		else
+			return (deploy_all_table(a->next, NULL));
+	}
+	else if (!a)
+	{
+		if (!b)
+			return ;
+		if (b->next == NULL)
+			return ;
+		else
+			return (deploy_all_table(NULL, b->next));
+	}
+	else
+	{
 
-	if (!*a)
-		return ;
-	s = ft_itoa((*a)->content);
-	ft_putstr_fd(s, 0);
-	free(s);
-	ft_putchar_fd('\n', 0);
-	if ((*a)->next == NULL)
-		return ;
-	return (deploy_table(&(*a)->next));
+		if (a->next == NULL && b->next == NULL)
+			return ;
+		if (b->next == NULL)
+			return (deploy_all_table(a->next, NULL));
+		if (a->next == NULL)
+			return (deploy_all_table(NULL, b->next));
+		else
+			return (deploy_all_table(a->next, b->next));
+	}
 }
 
 int	ft_length_tab(char **pstr, int start)
@@ -75,4 +116,30 @@ int	ft_length_tab(char **pstr, int start)
 		++len;
 	}
 	return (len);
+}
+
+int length_lst(t_push_swap **a)
+{
+	if (!(*a))
+		return (0);
+	return(length_lst(&(*a)->next) + 1);
+}
+
+int	somme_lst(t_push_swap **a)
+{
+	if (!(*a))
+		return (0);
+	return (somme_lst(&(*a)->next) + (*a)->content);
+}
+
+int median_lst(t_push_swap **a)
+{
+	int somme;
+	int length;
+	int res;
+
+	somme = somme_lst(a);
+	length = length_lst(a);
+	res = somme / length;
+	return(res);
 }

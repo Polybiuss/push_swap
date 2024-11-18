@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 21:34:40 by jbergos           #+#    #+#             */
-/*   Updated: 2024/11/17 14:36:39 by jbergos          ###   ########.fr       */
+/*   Updated: 2024/11/18 18:03:17 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,26 @@
 
 int	main(int argc, char *argv[])
 {
-	t_push_swap	*table;
+	t_push_swap	*a;
+	t_push_swap *b = NULL;
 
 	if (argc == 1)
 		return (0);
-	table = wich_parsing(argc, argv);
-	if (!table)
-		return (ft_putstr_fd(ERROR, 0), 0);
-	if (!check_doble_lst(table))
+	a = wich_parsing(argc, argv);
+	if (!a)
+		return (ft_putstr_fd("Error\n", 0), 3);
+	if (!check_doble_lst(a))
 	{
-		lst_clear(table);
-		return (ft_putstr_fd(ERROR, 0), 0);
+		lst_clear(a);
+		return (ft_putstr_fd("Error\n", 0), 3);
 	}
-	deploy_table(&table);
-	lst_clear(table);
+	if (ft_sorted(a, b))
+		ft_putstr_fd("Sorted", 0);
+	else
+		// testing_cmd(&a, &b);
+		ft_sort(&a, &b);
+	lst_clear(a);
+	if (b)
+		lst_clear(b);
 	return (0);
 }

@@ -4,6 +4,12 @@ SOURCES = push_swap.c \
 	checker.c \
 	parsing.c \
 	utils.c \
+	swap.c \
+	push.c \
+	rotate.c \
+	reverse_rotate.c \
+	testing.c \
+	sorting.c \
 
 OBJECTS = $(SOURCES:.c=.o)
 CC = cc
