@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:17:23 by jbergos           #+#    #+#             */
-/*   Updated: 2024/11/18 13:06:26 by jbergos          ###   ########.fr       */
+/*   Updated: 2024/11/18 19:01:32 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	rotate_a(t_push_swap **a, int bl)
 	tmp->next = last->next;
 	last->next = tmp;
 	if (bl)
-		ft_putstr_fd("ra\n", 0);
+		ft_putstr_fd("ra\n", 1);
 }
 
 void	rotate_b(t_push_swap **b, int bl)
@@ -45,12 +45,12 @@ void	rotate_b(t_push_swap **b, int bl)
 	tmp->next = lst->next;
 	lst->next = tmp;
 	if (bl)
-		ft_putstr_fd("rb\n", 0);
+		ft_putstr_fd("rb\n", 1);
 }
 
 void	rotate_rr(t_push_swap **a, t_push_swap **b)
 {
 	rotate_a(a, 0);
 	rotate_b(b, 0);
-	ft_putstr_fd("rr\n", 0);
+	ft_putstr_fd("rr\n", 1);
 }

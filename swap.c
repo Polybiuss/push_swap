@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:04:08 by jbergos           #+#    #+#             */
-/*   Updated: 2024/11/18 14:20:06 by jbergos          ###   ########.fr       */
+/*   Updated: 2024/11/18 19:01:19 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	swap_a(t_push_swap **a, int bl)
 	(*a)->content = (*a)->next->content;
 	(*a)->next->content = tmp;
 	if (bl)
-		ft_putstr_fd("sa\n", 0);
+		ft_putstr_fd("sa\n", 1);
 }
 
 void	swap_b(t_push_swap **b, int bl)
@@ -35,12 +35,12 @@ void	swap_b(t_push_swap **b, int bl)
 	(*b)->content = (*b)->next->content;
 	(*b)->next->content = tmp;
 	if (bl)
-		ft_putstr_fd("sb\n", 0);
+		ft_putstr_fd("sb\n", 1);
 }
 
 void	swap_s(t_push_swap **a, t_push_swap **b)
 {
 	swap_a(a, 0);
 	swap_b(b, 0);
-	ft_putstr_fd("ss\n", 0);
+	ft_putstr_fd("ss\n", 1);
 }

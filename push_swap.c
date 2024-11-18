@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 21:34:40 by jbergos           #+#    #+#             */
-/*   Updated: 2024/11/18 18:03:17 by jbergos          ###   ########.fr       */
+/*   Updated: 2024/11/18 18:36:39 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int argc, char *argv[])
 		return (ft_putstr_fd("Error\n", 0), 3);
 	}
 	if (ft_sorted(a, b))
-		ft_putstr_fd("Sorted", 0);
+		return (0);
 	else
 		// testing_cmd(&a, &b);
 		ft_sort(&a, &b);
