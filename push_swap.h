@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 23:11:54 by jbergos           #+#    #+#             */
-/*   Updated: 2024/11/18 16:54:11 by jbergos          ###   ########.fr       */
+/*   Updated: 2024/11/19 14:08:41 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,7 @@ int			ft_sorted(t_push_swap *a, t_push_swap *b);
 int			median_lst(t_push_swap **a);
 void		ft_sort(t_push_swap **a, t_push_swap **b);
 void		sort_two(t_push_swap **a);
+int			ft_reverse_sort_one_lst(t_push_swap **one);
+int			ft_sort_one_lst(t_push_swap **one);
 
 #endif

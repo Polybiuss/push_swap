@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 16:40:19 by jbergos           #+#    #+#             */
-/*   Updated: 2024/11/18 19:01:45 by jbergos          ###   ########.fr       */
+/*   Updated: 2024/11/19 14:14:08 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	reverse_rotate_b(t_push_swap **b, int bl)
 	lst->next = *b;
 	*b = lst;
 	if (bl)
-		ft_putstr_fd("rrr\n", 1);
+		ft_putstr_fd("rrb\n", 1);
 }
 
 void	reverse_rotate_r(t_push_swap **a, t_push_swap **b)

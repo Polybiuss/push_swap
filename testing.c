@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 11:19:59 by jbergos           #+#    #+#             */
-/*   Updated: 2024/11/18 17:28:09 by jbergos          ###   ########.fr       */
+/*   Updated: 2024/11/19 13:01:36 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,50 @@ int	ft_sorted(t_push_swap *a, t_push_swap *b)
 		if (!tmp)
 			break;
 		if (sort > tmp->content)
+			return (0);
+		sort = tmp->content;
+	}
+	return (1);
+}
+
+int ft_sort_one_lst(t_push_swap **one)
+{
+	int sort;
+	t_push_swap *tmp;
+
+	if (!(*one))
+		return (1);
+
+	tmp = *one;
+	sort = (*one)->content;
+	while (tmp)
+	{
+		tmp = tmp->next;
+		if (!tmp)
+			break;
+		if(sort > tmp->content)
+			return (0);
+		sort = tmp->content;
+	}
+	return (1);
+}
+
+int ft_reverse_sort_one_lst(t_push_swap **one)
+{
+	int	sort;
+	t_push_swap *tmp;
+
+	if (!(*one))
+		return (1);
+	
+	tmp = *one;
+	sort = (*one)->content;
+	while (tmp)
+	{
+		tmp = tmp->next;
+		if (!tmp)
+			break;
+		if (sort < tmp->content)
 			return (0);
 		sort = tmp->content;
 	}
