@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 23:11:54 by jbergos           #+#    #+#             */
-/*   Updated: 2024/11/19 14:08:41 by jbergos          ###   ########.fr       */
+/*   Updated: 2024/11/20 21:17:02 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,17 @@ typedef struct s_push_swap
 	int						content;
 	struct s_push_swap		*next;
 }	t_push_swap;
+
+typedef	struct s_chunk
+{
+	int len;
+	int	n;
+	int middle;
+	int offset;
+	int start;
+	int end;
+	int *tab_sorted;
+}	t_chunck;
 
 t_push_swap	*stack_new(int n);
 t_push_swap	*add_content(t_push_swap *s_list, int n);

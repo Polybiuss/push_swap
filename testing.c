@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 11:19:59 by jbergos           #+#    #+#             */
-/*   Updated: 2024/11/19 13:01:36 by jbergos          ###   ########.fr       */
+/*   Updated: 2024/11/20 10:21:05 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,9 @@ void	testing_cmd(t_push_swap **a, t_push_swap **b)
 {
 	char cmd[4];
 	int	i = 1;
+	int	count;
 
+	count = 0;
 	deploy_all_table(*a, *b);
 	while (i)
 	{
@@ -116,10 +118,12 @@ void	testing_cmd(t_push_swap **a, t_push_swap **b)
 			i = 0;
 		else
 			continue;
+		++count;
 		ft_putstr_fd("___|___\n", 0);
 		deploy_all_table(*a, *b);
 		ft_putstr_fd("___|___\n", 0);
 		ft_putstr_fd("a  |  b\n", 0);
+		printf("count : %d\n", i - 1);
 		if (ft_sorted(*a ,*b))
 		{
 			ft_putstr_fd("Congatulations !!\n", 0);
