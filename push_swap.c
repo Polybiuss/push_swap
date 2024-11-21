@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 21:34:40 by jbergos           #+#    #+#             */
-/*   Updated: 2024/11/20 17:32:18 by jbergos          ###   ########.fr       */
+/*   Updated: 2024/11/21 15:54:40 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int	main(int argc, char *argv[])
 	else
 		// testing_cmd(&a, &b);
 		ft_sort(&a, &b);
-	lst_clear(a);
+	if (a)
+		lst_clear(a);
 	if (b)
 		lst_clear(b);
 	return (0);

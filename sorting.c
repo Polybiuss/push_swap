@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 15:49:34 by jbergos           #+#    #+#             */
-/*   Updated: 2024/11/20 21:41:28 by jbergos          ###   ########.fr       */
+/*   Updated: 2024/11/21 17:59:11 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,188 @@ t_chunck *create_chunk(t_push_swap **a)
 	return (chunck); 
 }
 
+int	find_chunk_numb(t_push_swap **a, t_chunck *chunk)
+{
+	t_push_swap *tmp;
+	int i;
+
+	if (!(*a))
+		return (-1);
+	tmp = (*a);
+	i = 0;
+	while (tmp)
+	{
+		if (tmp->content >= chunk->start && tmp->content <= chunk->end)
+			return (i);
+		tmp = tmp->next;
+		++i;
+	}
+	return (-1);
+}
+
+void	push_b_chunk(t_push_swap **a, t_push_swap **b, int index)
+{
+	int i;
+	i = index;
+	while (i)
+	{
+		rotate_a(a, 1);
+		--i;
+	}
+	push_b(a, b);
+}
+
+void	check_b_chunk(t_push_swap **b, t_chunck *chunk)
+{
+	// (void)chunk;
+	// printf("chunck_middle : %d\n", chunk->middle);
+	// printf("b value %d\n", (*b)->content);
+	if ((*b)->content < chunk->middle)
+		rotate_b(b , 1);
+	// return ;
+}
+
+void	push_chunk(t_push_swap **a, t_push_swap **b, t_chunck *chunk)
+{
+	int	index;
+
+	index = 1;
+	if (!(*a))
+		return ;
+	while (index != -1)
+	{
+		index = find_chunk_numb(a, chunk);
+		if (index == -1)
+			return ;
+		push_b_chunk(a, b, index);
+		check_b_chunk(b, chunk);
+	}
+}
+
+int	new_start(t_chunck *chunk)
+{
+	int i;
+
+	i = 0;
+	while (i < chunk->len)
+	{
+		if (chunk->start == chunk->tab_sorted[i])
+			break;
+		++i;
+	}
+	if (i - chunk->offset <0)
+		return (chunk->tab_sorted[0]);
+	else
+		return (chunk->tab_sorted[i - chunk->offset]);
+
+}
+
+int new_end(t_chunck *chunk)
+{
+	int	i;
+
+	i = 0;
+	while (i < chunk->len)
+	{
+		if (chunk->end == chunk->tab_sorted[i])
+			break;
+		++i;
+	}
+	if (i + chunk->offset > chunk->len -1)
+		return (chunk->tab_sorted[chunk->len - 1]);
+	else
+		return (chunk->tab_sorted[i + chunk->offset]);
+}
+
+int	find_chunk_numb_b(t_push_swap **b, int find)
+{
+	t_push_swap *tmp;
+	int	i;
+
+	if (!(*b))
+		return (-1);
+	tmp = (*b);
+	i = 0;
+	while (tmp)
+	{
+		if (tmp->content == find)
+			return (i);
+		tmp = tmp->next;
+		++i;
+	}
+	return (-1);
+}
+
+int	find_rchunk_numb_b(t_push_swap **b, int find)
+{
+	t_push_swap	*tmp;
+	int	i;
+
+	if (!(*b))
+		return (-1);
+	tmp = (*b);
+	i = length_lst(b);
+	while (tmp)
+	{
+		if (tmp->content == find)
+			return (i);
+		tmp = tmp->next;
+		--i;
+	}
+	return (-1);
+}
+
+void	to_a(t_push_swap **a, t_push_swap **b, int index)
+{
+	int	i;
+
+	i = index;
+	while (i > 0)
+	{
+		rotate_b(b, 1);
+		--i;
+	}
+	push_a(b, a);
+}
+
+void	to_ra(t_push_swap **a, t_push_swap**b, int index)
+{
+	int i;
+
+	i = index;
+	while (i > 0)
+	{
+		reverse_rotate_b(b, 1);
+		--i;
+	}
+	push_a(b, a);
+}
+
+void	push_sorted_chunk(t_push_swap **a, t_push_swap **b, t_chunck *chunk)
+{
+	int	nb;
+	int	index;
+	int r_index;
+
+	index = 1;
+	r_index = 1;
+	nb = chunk->len - 1;
+	if (!(*b))
+		return ;
+	while (index != -1 && nb >= 0 && r_index != -1)
+	{
+		index = find_chunk_numb_b(b, chunk->tab_sorted[nb]);
+		r_index = find_rchunk_numb_b(b, chunk->tab_sorted[nb]);
+		if (index == -1 || r_index == -1)
+			return ;
+		if (index < r_index)
+			to_a(a, b, index);
+		else
+			to_ra(a, b, r_index);
+		--nb;
+	}
+}
+
 void	ft_sort(t_push_swap **a, t_push_swap **b)
 {
 	t_chunck *chunk;
@@ -124,16 +306,13 @@ void	ft_sort(t_push_swap **a, t_push_swap **b)
 	if (ft_sorted(*a, *b))
 		return;
 	chunk = create_chunk(a);
-	printf("len : %d\n", chunk->len);
-	printf("n : %d\n", chunk->n);
-	printf("middle : %d\n", chunk->middle);
-	printf("offset : %d\n", chunk->offset);
-	printf("start : %d\n", chunk->start);
-	printf("end : %d\n", chunk->end);
-	int i = 0;
-	while (i < chunk->len)
+	while ((*a))
 	{
-		printf("teb :%d\n", chunk->tab_sorted[i]);
-		++i;
+	push_chunk(a, b, chunk);
+	chunk->start = new_start(chunk);
+	chunk->end = new_end(chunk);
 	}
+	push_sorted_chunk(a, b, chunk);
+	free(chunk->tab_sorted);
+	free(chunk);
 }
