@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 15:49:34 by jbergos           #+#    #+#             */
-/*   Updated: 2024/11/21 17:59:11 by jbergos          ###   ########.fr       */
+/*   Updated: 2024/11/21 18:34:57 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,27 @@ int	find_chunk_numb(t_push_swap **a, t_chunck *chunk)
 	return (-1);
 }
 
+int	find_rchunk_numb(t_push_swap **a, t_chunck *chunk)
+{
+	t_push_swap *tmp;
+	int	i;
+	int res;
+
+	if (!(*a))
+		return (-1);
+	tmp = (*a);
+	i = length_lst(a);
+	res = -1;
+	while (tmp)
+	{
+		if (tmp->content >= chunk->start && tmp->content <= chunk->end)
+			res = i;
+		tmp = tmp->next;
+		--i;
+	}
+	return (res);
+}
+
 void	push_b_chunk(t_push_swap **a, t_push_swap **b, int index)
 {
 	int i;
@@ -150,27 +171,42 @@ void	push_b_chunk(t_push_swap **a, t_push_swap **b, int index)
 
 void	check_b_chunk(t_push_swap **b, t_chunck *chunk)
 {
-	// (void)chunk;
-	// printf("chunck_middle : %d\n", chunk->middle);
-	// printf("b value %d\n", (*b)->content);
 	if ((*b)->content < chunk->middle)
 		rotate_b(b , 1);
-	// return ;
+}
+
+void	push_rb_chunk(t_push_swap **a, t_push_swap **b, int index)
+{
+	int i;
+
+	i = index;
+	while (i > 0)
+	{
+		reverse_rotate_a(a, 1);
+		--i;
+	}
+	push_b(a, b);
 }
 
 void	push_chunk(t_push_swap **a, t_push_swap **b, t_chunck *chunk)
 {
 	int	index;
+	int	r_index;
 
 	index = 1;
+	r_index = -1;
 	if (!(*a))
 		return ;
-	while (index != -1)
+	while (index != -1 || r_index != -1)
 	{
 		index = find_chunk_numb(a, chunk);
-		if (index == -1)
+		r_index = find_rchunk_numb(a, chunk);
+		if (index == -1 || r_index == -1)
 			return ;
-		push_b_chunk(a, b, index);
+		if (index < r_index)
+			push_b_chunk(a, b, index);
+		else
+			push_rb_chunk(a, b, r_index);
 		check_b_chunk(b, chunk);
 	}
 }
