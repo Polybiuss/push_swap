@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 23:11:54 by jbergos           #+#    #+#             */
-/*   Updated: 2024/11/21 15:35:36 by jbergos          ###   ########.fr       */
+/*   Updated: 2024/11/25 19:23:20 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef	struct s_chunk
 	int start;
 	int end;
 	int *tab_sorted;
+	int	down;
 }	t_chunck;
 
 t_push_swap	*stack_new(int n);
@@ -67,8 +68,32 @@ int			somme_lst(t_push_swap **a);
 int			ft_sorted(t_push_swap *a, t_push_swap *b);
 int			median_lst(t_push_swap **a);
 void		ft_sort(t_push_swap **a, t_push_swap **b);
-void		sort_two(t_push_swap **a);
 int			ft_reverse_sort_one_lst(t_push_swap **one);
 int			ft_sort_one_lst(t_push_swap **one);
+t_chunck	*create_chunk(t_push_swap **a);
+void		find_start(t_push_swap **a, t_chunck *chunk);
+void		find_end(t_push_swap **a, t_chunck *chunk);
+void		find_start_and_end(t_push_swap **a, t_chunck *chunk);
+int			new_start(t_chunck *chunk);
+int			new_end(t_chunck *chunk);
+int			wish_n(int len);
+int			find_middle(int *tab, int len);
+void		ft_swap(int *a, int *b);
+void		ft_sort_int_tab(int *tab, int size);
+int			middle_lst(t_push_swap **a, int len);
+int			*tab_sorted(t_push_swap **a, int len);
+void		check_b_chunk(t_push_swap **b, t_chunck *chunk);
+void		push_b_chunk(t_push_swap **a, t_push_swap **b, int in, t_chunck *c);
+int			find_chunk_numb(t_push_swap **a, t_chunck *chunk);
+void		push_chunk(t_push_swap **a, t_push_swap **b, t_chunck *chunk);
+int			is_rotate_b(t_push_swap **b, t_chunck *chunk);
+int			find_chunk_numb_b(t_push_swap **b, int find);
+int			find_rchunk_numb_b(t_push_swap **b, int find);
+void		push_sorted_chunk(t_push_swap **a, t_push_swap **b, t_chunck *chunk);
+void		push_to_queue(t_push_swap **a, t_push_swap **b, t_chunck *chunk);
+void		to_aa(t_push_swap **a, t_push_swap **b, int index, t_chunck *chunk);
+void		chuck_down(t_push_swap **a, t_chunck *chunk);
+void		to_ra(t_push_swap **a, t_push_swap**b, int index);
+int			last_value(t_push_swap **a);
 
 #endif

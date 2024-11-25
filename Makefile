@@ -10,6 +10,12 @@ SOURCES = push_swap.c \
 	reverse_rotate.c \
 	testing.c \
 	sorting.c \
+	chunk.c \
+	chunk_2.c \
+	chunk_3.c \
+	push_chunk.c \
+	push_sorted_chunk.c \
+	push_to_queue.c \
 
 OBJECTS = $(SOURCES:.c=.o)
 CC = cc
