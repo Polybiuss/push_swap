@@ -6,44 +6,24 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 15:49:34 by jbergos           #+#    #+#             */
-/*   Updated: 2024/11/25 19:22:51 by jbergos          ###   ########.fr       */
+/*   Updated: 2024/11/26 17:52:11 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	find_rchunk_numb(t_push_swap **a, t_chunck *chunk)
+void	sort_low_numb(t_push_swap **a, t_push_swap **b, int len)
 {
-	t_push_swap	*tmp;
-	int			i;
-	int			res;
-
-	if (!(*a))
-		return (-1);
-	tmp = (*a);
-	i = length_lst(a);
-	res = -1;
-	while (tmp)
-	{
-		if (tmp->content >= chunk->start && tmp->content <= chunk->end)
-			res = i;
-		tmp = tmp->next;
-		--i;
-	}
-	return (res);
-}
-
-void	push_rb_chunk(t_push_swap **a, t_push_swap **b, int index)
-{
-	int	i;
-
-	i = index;
-	while (i > 0)
-	{
-		reverse_rotate_a(a, 1);
-		--i;
-	}
-	push_b(a, b);
+	if (len == 2)
+		sort_two(a);
+	if (len == 3)
+		sort_three(a);
+	if (len == 4)
+		sort_four(a, b);
+	if (len == 5)
+		sort_five(a, b);
+	if (len == 6)
+		sort_six(a, b);
 }
 
 void	ft_sort(t_push_swap **a, t_push_swap **b)
@@ -52,9 +32,14 @@ void	ft_sort(t_push_swap **a, t_push_swap **b)
 
 	if (ft_sorted(*a, *b))
 		return ;
-	chunk = create_chunk(a);
-	push_chunk(a, b, chunk);
-	push_sorted_chunk(a, b, chunk);
-	free(chunk->tab_sorted);
-	free(chunk);
+	if (length_lst(a) <= 6)
+		sort_low_numb(a, b, length_lst(a));
+	else
+	{
+		chunk = create_chunk(a);
+		push_chunk(a, b, chunk);
+		push_sorted_chunk(a, b, chunk);
+		free(chunk->tab_sorted);
+		free(chunk);
+	}
 }

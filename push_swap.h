@@ -6,14 +6,15 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 23:11:54 by jbergos           #+#    #+#             */
-/*   Updated: 2024/11/25 19:23:20 by jbergos          ###   ########.fr       */
+/*   Updated: 2024/11/26 22:03:00 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
-// # define ERROR "Error\n
 # include "libft.h"
+# include "get_next_line.h"
+# include "ft_printf.h"
 # include <stdio.h>
 
 typedef struct s_push_swap
@@ -22,17 +23,32 @@ typedef struct s_push_swap
 	struct s_push_swap		*next;
 }	t_push_swap;
 
-typedef	struct s_chunk
+typedef struct s_chunk
 {
-	int len;
+	int	len;
 	int	n;
-	int middle;
-	int offset;
-	int start;
-	int end;
-	int *tab_sorted;
+	int	middle;
+	int	offset;
+	int	start;
+	int	end;
+	int	*tab_sorted;
 	int	down;
 }	t_chunck;
+
+typedef struct s_three
+{
+	int	len;
+	int	pos_low;
+	int	pos_high;
+	int	*tab;
+}	t_three;
+
+typedef struct s_low_value
+{
+	int	len;
+	int	*tab;
+	int	pos_low;
+}	t_low_value;
 
 t_push_swap	*stack_new(int n);
 t_push_swap	*add_content(t_push_swap *s_list, int n);
@@ -60,16 +76,9 @@ void		rotate_rr(t_push_swap **a, t_push_swap **b);
 void		reverse_rotate_a(t_push_swap **a, int bl);
 void		reverse_rotate_r(t_push_swap **a, t_push_swap **b);
 void		reverse_rotate_b(t_push_swap **b, int bl);
-void		testing_cmd(t_push_swap **a, t_push_swap **b);
-void		deploy_all_table(t_push_swap *a, t_push_swap *b);
-void		testing_cmd(t_push_swap **a, t_push_swap **b);
 int			length_lst(t_push_swap **a);
-int			somme_lst(t_push_swap **a);
 int			ft_sorted(t_push_swap *a, t_push_swap *b);
-int			median_lst(t_push_swap **a);
 void		ft_sort(t_push_swap **a, t_push_swap **b);
-int			ft_reverse_sort_one_lst(t_push_swap **one);
-int			ft_sort_one_lst(t_push_swap **one);
 t_chunck	*create_chunk(t_push_swap **a);
 void		find_start(t_push_swap **a, t_chunck *chunk);
 void		find_end(t_push_swap **a, t_chunck *chunk);
@@ -89,11 +98,26 @@ void		push_chunk(t_push_swap **a, t_push_swap **b, t_chunck *chunk);
 int			is_rotate_b(t_push_swap **b, t_chunck *chunk);
 int			find_chunk_numb_b(t_push_swap **b, int find);
 int			find_rchunk_numb_b(t_push_swap **b, int find);
-void		push_sorted_chunk(t_push_swap **a, t_push_swap **b, t_chunck *chunk);
+void		push_sorted_chunk(t_push_swap **a, t_push_swap **b, t_chunck *c);
 void		push_to_queue(t_push_swap **a, t_push_swap **b, t_chunck *chunk);
 void		to_aa(t_push_swap **a, t_push_swap **b, int index, t_chunck *chunk);
 void		chuck_down(t_push_swap **a, t_chunck *chunk);
 void		to_ra(t_push_swap **a, t_push_swap**b, int index);
 int			last_value(t_push_swap **a);
+int			*tab_three(t_push_swap **a, int len);
+t_three		*create_three(t_push_swap **a);
+t_low_value	*create_low(t_push_swap **a);
+int			find_pos_low(int *tab, int len);
+int			find_pos_high(int *tab, int len);
+void		sort_two(t_push_swap **a);
+void		sort_three(t_push_swap **a);
+void		sort_four(t_push_swap **a, t_push_swap **b);
+void		sort_five(t_push_swap **a, t_push_swap **b);
+void		sort_six(t_push_swap **a, t_push_swap **b);
+int			top_lst_low(t_push_swap **a);
+void		triple_cmd(t_push_swap **a);
+void		to_a_low_num(t_push_swap **a, t_push_swap **b, int index);
+void		to_ra_low_num(t_push_swap **a, t_push_swap **b, int index);
+void		push_one_low_value(t_push_swap **a, t_push_swap **b);
 
 #endif

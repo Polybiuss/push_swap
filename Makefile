@@ -1,7 +1,8 @@
 NAME = push_swap
+BONUS_NAME = checker
 SOURCES = push_swap.c \
 	create_list.c \
-	checker.c \
+	checker_swap.c \
 	parsing.c \
 	utils.c \
 	swap.c \
@@ -16,25 +17,45 @@ SOURCES = push_swap.c \
 	push_chunk.c \
 	push_sorted_chunk.c \
 	push_to_queue.c \
+	create_struct.c \
+	sort_low_num.c \
+	cmd_low_num.c \
+
+SOURCES_BONUS = checker.c \
+	parsing.c \
+	checker_swap.c \
+	create_list.c \
+	utils.c \
+	swap.c \
+	push.c \
+	rotate.c \
+	reverse_rotate.c \
+	testing.c \
 
 OBJECTS = $(SOURCES:.c=.o)
+OBJECTS_BONUS = $(SOURCES_BONUS:.c=.o)
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
 LIBFT = libft.a
+GNL = libftgnl.a
+PRINTF = libftprintf.a
 
 all : $(NAME)
 
 $(NAME) : $(OBJECTS) $(LIBFT)
 	$(CC) $(CFLAGS) $^ -o $(NAME)
 
+bonus : $(OBJECTS_BONUS) $(LIBFT) $(GNL) $(PRINTF)
+	$(CC) $(CFLAGS) $^ -o $(BONUS_NAME)
+
 %.o: %.c
 	$(CC) -c $(CFLAGS) $?
 
 clean:
-	rm -f $(OBJECTS)
+	rm -f $(OBJECTS) $(OBJECTS_BONUS)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(BONUS_NAME)
 
 re : fclean all
 
