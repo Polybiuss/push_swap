@@ -1,60 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reverse_rotate.c                                   :+:      :+:    :+:   */
+/*   checker_rotate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/17 16:40:19 by jbergos           #+#    #+#             */
-/*   Updated: 2024/11/27 14:52:29 by jbergos          ###   ########.fr       */
+/*   Created: 2024/11/17 16:17:23 by jbergos           #+#    #+#             */
+/*   Updated: 2024/11/27 15:36:04 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	reverse_rotate_a(t_push_swap **a, int bl)
+void	ra(t_push_swap **a)
 {
 	t_push_swap	*tmp;
-	t_push_swap	*lst;
+	t_push_swap	*last;
 
 	if (!(*a) || !(*a)->next)
 		return ;
-	lst = *a;
-	while (lst->next)
-	{
-		tmp = lst;
-		lst = lst->next;
-	}
-	tmp->next = lst->next;
-	lst->next = *a;
-	*a = lst;
-	if (bl)
-		ft_putstr_fd("rra\n", 1);
+	tmp = *a;
+	*a = (*a)->next;
+	last = *a;
+	while (last->next)
+		last = last->next;
+	tmp->next = NULL;
+	last->next = tmp;
 }
 
-void	reverse_rotate_b(t_push_swap **b, int bl)
+void	rb(t_push_swap **b)
 {
 	t_push_swap	*tmp;
 	t_push_swap	*lst;
 
 	if (!(*b) || !(*b)->next)
 		return ;
+	tmp = *b;
+	*b = (*b)->next;
 	lst = *b;
 	while (lst->next)
-	{
-		tmp = lst;
 		lst = lst->next;
-	}
-	tmp->next = lst->next;
-	lst->next = *b;
-	*b = lst;
-	if (bl)
-		ft_putstr_fd("rrb\n", 1);
+	tmp->next = NULL;
+	lst->next = tmp;
 }
 
-void	reverse_rotate_r(t_push_swap **a, t_push_swap **b)
+void	rr(t_push_swap **a, t_push_swap **b)
 {
-	reverse_rotate_a(a, 0);
-	reverse_rotate_b(b, 0);
-	ft_putstr_fd("rrr\n", 1);
+	ra(a);
+	rb(b);
 }

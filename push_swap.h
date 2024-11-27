@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 23:11:54 by jbergos           #+#    #+#             */
-/*   Updated: 2024/11/26 22:03:00 by jbergos          ###   ########.fr       */
+/*   Updated: 2024/11/27 16:40:19 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define PUSH_SWAP_H
 # include "libft.h"
 # include "get_next_line.h"
-# include "ft_printf.h"
 # include <stdio.h>
 
 typedef struct s_push_swap
@@ -119,5 +118,18 @@ void		triple_cmd(t_push_swap **a);
 void		to_a_low_num(t_push_swap **a, t_push_swap **b, int index);
 void		to_ra_low_num(t_push_swap **a, t_push_swap **b, int index);
 void		push_one_low_value(t_push_swap **a, t_push_swap **b);
+void		get_line(t_push_swap **a, t_push_swap **b);
+int			get_cmd(t_push_swap **a, t_push_swap **b, char *cmd);
+void		pa(t_push_swap **b, t_push_swap **a);
+void		pb(t_push_swap **a, t_push_swap **b);
+void		rra(t_push_swap **a);
+void		rrb(t_push_swap **b);
+void		rrr(t_push_swap **a, t_push_swap **b);
+void		ra(t_push_swap **a);
+void		rb(t_push_swap **b);
+void		rr(t_push_swap **a, t_push_swap **b);
+void		sa(t_push_swap **a);
+void		sb(t_push_swap **b);
+void		ss(t_push_swap **a, t_push_swap **b);
 
 #endif

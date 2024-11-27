@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   checker_push.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/30 23:27:41 by jbergos           #+#    #+#             */
-/*   Updated: 2024/11/27 16:28:36 by jbergos          ###   ########.fr       */
+/*   Created: 2024/11/17 15:29:47 by jbergos           #+#    #+#             */
+/*   Updated: 2024/11/27 15:35:48 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "push_swap.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
-# include <unistd.h>
-# include <stdlib.h>
+void	pa(t_push_swap **b, t_push_swap **a)
+{
+	t_push_swap	*tmp;
 
-char	*ft_free(char *buffer, char *buf);
-char	*ft_next(char *buffer);
-char	*ft_line(char *buffer);
-char	*read_file(int fd, char *res);
-char	*get_next_line(int fd);
-#endif
+	if (!*b)
+		return ;
+	tmp = *b;
+	*b = (*b)->next;
+	tmp->next = *a;
+	*a = tmp;
+}
+
+void	pb(t_push_swap **a, t_push_swap **b)
+{
+	t_push_swap	*tmp;
+
+	if (!*a)
+		return ;
+	tmp = *a;
+	*a = (*a)->next;
+	tmp->next = *b;
+	*b = tmp;
+}

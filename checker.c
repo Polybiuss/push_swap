@@ -6,7 +6,7 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 22:04:38 by jbergos           #+#    #+#             */
-/*   Updated: 2024/11/26 22:17:19 by jbergos          ###   ########.fr       */
+/*   Updated: 2024/11/27 12:32:13 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,7 @@ int	main(int argc, char *argv[])
 		lst_clear(a);
 		return (ft_putstr_fd("Error\n", 2), 3);
 	}
-	if (ft_sorted(a, b))
-		;
-	else
-		// ft_sort(&a, &b);
+	get_line(&a, &b);
 	if (a)
 		lst_clear(a);
 	if (b)

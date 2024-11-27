@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
+/*   checker_swap1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:04:08 by jbergos           #+#    #+#             */
-/*   Updated: 2024/11/27 15:07:35 by jbergos          ###   ########.fr       */
+/*   Updated: 2024/11/27 15:36:15 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap_a(t_push_swap **a, int bl)
+void	sa(t_push_swap **a)
 {
 	int	tmp;
 
@@ -21,11 +21,9 @@ void	swap_a(t_push_swap **a, int bl)
 	tmp = (*a)->content;
 	(*a)->content = (*a)->next->content;
 	(*a)->next->content = tmp;
-	if (bl)
-		ft_putstr_fd("sa\n", 1);
 }
 
-void	swap_b(t_push_swap **b, int bl)
+void	sb(t_push_swap **b)
 {
 	int	tmp;
 
@@ -34,13 +32,10 @@ void	swap_b(t_push_swap **b, int bl)
 	tmp = (*b)->content;
 	(*b)->content = (*b)->next->content;
 	(*b)->next->content = tmp;
-	if (bl)
-		ft_putstr_fd("sb\n", 1);
 }
 
-void	swap_s(t_push_swap **a, t_push_swap **b)
+void	ss(t_push_swap **a, t_push_swap **b)
 {
-	swap_a(a, 0);
-	swap_b(b, 0);
-	ft_putstr_fd("ss\n", 1);
+	sa(a);
+	sb(b);
 }

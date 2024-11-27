@@ -26,26 +26,26 @@ SOURCES_BONUS = checker.c \
 	checker_swap.c \
 	create_list.c \
 	utils.c \
-	swap.c \
-	push.c \
-	rotate.c \
-	reverse_rotate.c \
+	checker_swap1.c \
+	checker_push.c \
+	checker_rotate.c \
+	checker_reverse_rotate.c \
 	testing.c \
+	checker_read.c \
+	get_next_line.c \
 
 OBJECTS = $(SOURCES:.c=.o)
 OBJECTS_BONUS = $(SOURCES_BONUS:.c=.o)
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
 LIBFT = libft.a
-GNL = libftgnl.a
-PRINTF = libftprintf.a
 
 all : $(NAME)
 
 $(NAME) : $(OBJECTS) $(LIBFT)
 	$(CC) $(CFLAGS) $^ -o $(NAME)
 
-bonus : $(OBJECTS_BONUS) $(LIBFT) $(GNL) $(PRINTF)
+bonus : $(OBJECTS_BONUS) $(LIBFT)
 	$(CC) $(CFLAGS) $^ -o $(BONUS_NAME)
 
 %.o: %.c
