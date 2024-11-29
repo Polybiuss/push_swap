@@ -1,0 +1,7 @@
+push_swap
+obj/
+*.a
+*.out
+*.o
+libft/
+checker

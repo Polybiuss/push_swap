@@ -6,15 +6,13 @@
 /*   By: jbergos <jbergos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 23:11:54 by jbergos           #+#    #+#             */
-/*   Updated: 2024/11/27 16:40:19 by jbergos          ###   ########.fr       */
+/*   Updated: 2024/11/29 18:16:54 by jbergos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
-# include "libft.h"
-# include "get_next_line.h"
-# include <stdio.h>
+# include "libft/libft.h"
 
 typedef struct s_push_swap
 {
